@@ -77,19 +77,18 @@ namespace AutocolantStudio
             string trimmed = TxtTextNou.Text.Trim();
             if (trimmed.Length > LungimeMaximaText || trimmed.Length <= 0)
             {
-                MessageBox.Show("Date incorecte");
+                MessageBox.Show("Date incorecte","Eroare", MessageBoxButton.OK,MessageBoxImage.Error);
                 TxtTextNou.Focus();
                 return;
             }
             TxtAutocolant.Text = trimmed;
+            TxtTextNou.Text = trimmed;
         }
 
         // ---------- Sarcina 6. Straturi (A33) ----------
         private void BtnStrat_Click(object sender, RoutedEventArgs e)
         {
-            // TODO Sarcina 6: compară Panel.GetZIndex(Autocolant) cu Panel.GetZIndex(AutocolantFix)
-            //                 și mută autocolantul sub / deasupra celui galben cu Panel.SetZIndex.
-            //                 Schimbă și textul butonului BtnStrat.
+
             if (Panel.GetZIndex(Autocolant) > Panel.GetZIndex(AutocolantFix))
             {
                 Panel.SetZIndex(Autocolant, 0);   // sub cel galben
@@ -97,7 +96,8 @@ namespace AutocolantStudio
             }
             else
             {
-                // completează: readu autocolantul deasupra și schimbă textul butonului
+                Panel.SetZIndex(Autocolant, Panel.GetZIndex(AutocolantFix) + 1);
+                BtnStrat.Content = "Autocolantul sub cel galben";
             }
 
         }
@@ -105,13 +105,22 @@ namespace AutocolantStudio
         // ---------- Sarcina 6. Efecte (A34) ----------
         private void SldOpacitate_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // TODO Sarcina 6: Autocolant.Opacity și textul TxtOpacitate în procente
+            Autocolant.Opacity = e.NewValue;
+            TxtOpacitate.Text = $"Opacitate: {e.NewValue}%";
         }
 
         private void ChkUmbra_Changed(object sender, RoutedEventArgs e)
         {
             // TODO Sarcina 6: bifat -> Autocolant.Effect = new DropShadowEffect { ... };
             //                 debifat -> Autocolant.Effect = null;
+            if (ChkUmbra.IsChecked == true)
+            {
+                Autocolant.Effect = new DropShadowEffect { BlurRadius = 12, ShadowDepth = 4, Opacity = 0.4 };
+            }
+            else
+            {
+                Autocolant.Effect = null;
+            }
         }
 
         // ---------- Sarcina 8 (avansat). Evidențierea la mouse ----------
