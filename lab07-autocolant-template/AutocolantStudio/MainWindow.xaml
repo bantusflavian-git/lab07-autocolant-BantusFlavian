@@ -49,7 +49,7 @@
                         CornerRadius="16">
                     <Border.RenderTransform>
                         <TransformGroup>
-                            <ScaleTransform x:Name="ScanareAutocolant"
+                            <ScaleTransform x:Name="ScalareAutocolant"
                                             ScaleX="1"
                                             ScaleY="1">
                                

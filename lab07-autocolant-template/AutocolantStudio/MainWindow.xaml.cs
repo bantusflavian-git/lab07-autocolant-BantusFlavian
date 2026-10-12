@@ -25,21 +25,30 @@ namespace AutocolantStudio
         // ---------- Sarcina 3. Deplasarea (A31, A35) ----------
         private void SldX_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // TODO Sarcina 3:
-            // 1. Ieși din metodă dacă fereastra nu este încă încărcată: if (!IsLoaded) return;
-            // 2. Copiază e.NewValue în DeplasareAutocolant.X
-            // 3. Afișează valoarea în TxtX, fără zecimale: $"X: {e.NewValue:0}"
+            if (!IsLoaded) return;   // la pornire fereastra nu este gata
+
+            DeplasareAutocolant.X = e.NewValue;
+            TxtX.Text = $"X: {e.NewValue:0}";
         }
+
 
         private void SldY_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // TODO Sarcina 3: la fel ca mai sus, pentru DeplasareAutocolant.Y și TxtY
+            if (!IsLoaded) return;
+
+            DeplasareAutocolant.Y = e.NewValue;
+            TxtY.Text = $"Y: {e.NewValue:0}";
         }
 
         // ---------- Sarcina 4. Rotirea și mărimea (A31) ----------
         private void SldUnghi_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // TODO Sarcina 4: RotireAutocolant.Angle și textul TxtUnghi ("Unghi: ...°")
+
+            if (!IsLoaded) return;
+
+            RotireAutocolant.Angle = e.NewValue;
+            TxtUnghi.Text = $"Unghi: {e.NewValue:0}°";
+
         }
 
         private void SldScala_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -47,6 +56,14 @@ namespace AutocolantStudio
             // TODO Sarcina 4: aceeași valoare pentru ScaleX și ScaleY (fără deformare)
             //                 și textul TxtScala în procente: $"Mărime: {e.NewValue * 100:0}%"
             // Sarcina 8 (avansat): mută această logică într-o metodă AplicaScala()
+            if (!IsLoaded) return;
+
+            ScalareAutocolant.ScaleX = e.NewValue;
+            ScalareAutocolant.ScaleY = e.NewValue;
+
+            TxtScala.Text = $"Mărime: {e.NewValue * 100:0}%";
+
+
         }
 
         // ---------- Sarcina 8 (avansat). Oglindirea ----------
@@ -71,6 +88,16 @@ namespace AutocolantStudio
             // TODO Sarcina 6: compară Panel.GetZIndex(Autocolant) cu Panel.GetZIndex(AutocolantFix)
             //                 și mută autocolantul sub / deasupra celui galben cu Panel.SetZIndex.
             //                 Schimbă și textul butonului BtnStrat.
+            if (Panel.GetZIndex(Autocolant) > Panel.GetZIndex(AutocolantFix))
+            {
+                Panel.SetZIndex(Autocolant, 0);   // sub cel galben
+                BtnStrat.Content = "Autocolantul deasupra celui galben";
+            }
+            else
+            {
+                // completează: readu autocolantul deasupra și schimbă textul butonului
+            }
+
         }
 
         // ---------- Sarcina 6. Efecte (A34) ----------
