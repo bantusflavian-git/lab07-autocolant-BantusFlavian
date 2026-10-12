@@ -53,8 +53,6 @@ namespace AutocolantStudio
 
         private void SldScala_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            // TODO Sarcina 4: aceeași valoare pentru ScaleX și ScaleY (fără deformare)
-            //                 și textul TxtScala în procente: $"Mărime: {e.NewValue * 100:0}%"
             // Sarcina 8 (avansat): mută această logică într-o metodă AplicaScala()
             if (!IsLoaded) return;
 
@@ -75,11 +73,15 @@ namespace AutocolantStudio
         // ---------- Sarcina 5. Textul, cu validare (A35) ----------
         private void BtnAplicaText_Click(object sender, RoutedEventArgs e)
         {
-            // TODO Sarcina 5:
-            // 1. Citește textul din TxtTextNou și elimină spațiile de la capete (Trim)
-            // 2. Dacă are 0 caractere sau mai mult de LungimeMaximaText:
-            //    MessageBox cu titlul "Date incorecte", focus pe TxtTextNou, return
-            // 3. Altfel: copiază textul în TxtAutocolant
+
+            string trimmed = TxtTextNou.Text.Trim();
+            if (trimmed.Length > LungimeMaximaText || trimmed.Length <= 0)
+            {
+                MessageBox.Show("Date incorecte");
+                TxtTextNou.Focus();
+                return;
+            }
+            TxtAutocolant.Text = trimmed;
         }
 
         // ---------- Sarcina 6. Straturi (A33) ----------
