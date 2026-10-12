@@ -47,6 +47,18 @@
                         Width="170" Height="70"
                         Background="#2563EB" BorderBrush="White" BorderThickness="4"
                         CornerRadius="16">
+                    <Border.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="ScanareAutocolant"
+                                            ScaleX="1"
+                                            ScaleY="1">
+                               
+                            </ScaleTransform>
+                            <RotateTransform x:Name="RotireAutocolant" Angle="-30"></RotateTransform>
+                            <TranslateTransform x:Name="DeplasareAutocolant" X="0" Y="0"></TranslateTransform>
+                            
+                        </TransformGroup>
+                    </Border.RenderTransform>
                     <TextBlock x:Name="TxtAutocolant" Text="Salut, WPF!" Foreground="White"
                                FontSize="22" FontWeight="Bold"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
