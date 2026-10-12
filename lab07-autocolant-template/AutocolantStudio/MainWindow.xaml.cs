@@ -139,6 +139,20 @@ namespace AutocolantStudio
             // TODO Sarcina 7: readu Slider-ele la valorile inițiale (ValueChanged face restul),
             //                 debifează CheckBox-urile, pune TextInitial pe autocolant,
             //                 golește TxtTextNou și readu autocolantul deasupra celui galben.
+
+            TxtAutocolant.Text = "Salut, WPF!";
+            SldOpacitate.Value = 1;
+            SldX.Value = 0;
+            SldY.Value = 0;
+            ChkOglindit.IsChecked = false;
+            TxtTextNou.Clear();
+            SldUnghi.Value = 0;
+            SldScala.Value = 1;
+            ChkUmbra.IsChecked = false;
+            ChkFolie.IsChecked = false;
+            Panel.SetZIndex(Autocolant, 2);
+            Panel.SetZIndex(AutocolantFix, 1);
+            BtnStrat.Content = "Autocolantul sub cel galben";
         }
     }
 }
