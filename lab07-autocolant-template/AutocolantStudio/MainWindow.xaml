@@ -1,0 +1,109 @@
+<Window x:Class="AutocolantStudio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Autocolant Studio" Width="1000" Height="640"
+        MinWidth="900" MinHeight="600">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ================= Coloana 0: scena ================= -->
+        <Border Grid.Column="0" Background="#E2E8F0" CornerRadius="12">
+            <Canvas x:Name="Scena" Width="560" Height="420"
+                    Background="#F1F5F9" ClipToBounds="True">
+
+                <!-- Stratul 0: laptopul (capacul, sigla, balamaua) -->
+                <Rectangle Canvas.Left="40" Canvas.Top="30" Width="480" Height="330"
+                           RadiusX="18" RadiusY="18" Fill="#334155"/>
+                <Ellipse Canvas.Left="250" Canvas.Top="165" Width="60" Height="60"
+                         Fill="#94A3B8" Opacity="0.5"/>
+                <Rectangle Canvas.Left="20" Canvas.Top="360" Width="520" Height="22"
+                           RadiusX="8" RadiusY="8" Fill="#475569"/>
+
+                <!-- Stratul 1: autocolantul fix (galben) -->
+                <!-- TODO Sarcina 6: adaugă Panel.ZIndex="1" -->
+                <Grid x:Name="AutocolantFix" Canvas.Left="330" Canvas.Top="70"
+                      Width="120" Height="120"
+                      RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <RotateTransform Angle="12"/>
+                    </Grid.RenderTransform>
+                    <Ellipse Fill="#FACC15" Stroke="#A16207" StrokeThickness="4"/>
+                    <TextBlock Text="C#" FontSize="40" FontWeight="Bold" Foreground="#422006"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+
+                <!-- Stratul 2: autocolantul utilizatorului -->
+                <!-- TODO Sarcina 2: adaugă RenderTransformOrigin="0.5,0.5" și, în interior,
+                     <Border.RenderTransform> cu un TransformGroup:
+                     ScaleTransform x:Name="ScalareAutocolant",
+                     RotateTransform x:Name="RotireAutocolant",
+                     TranslateTransform x:Name="DeplasareAutocolant" (în această ordine!) -->
+                <!-- TODO Sarcina 6: adaugă Panel.ZIndex="2" -->
+                <!-- TODO Sarcina 8 (avansat): adaugă evenimentele MouseEnter și MouseLeave -->
+                <Border x:Name="Autocolant" Canvas.Left="120" Canvas.Top="150"
+                        Width="170" Height="70"
+                        Background="#2563EB" BorderBrush="White" BorderThickness="4"
+                        CornerRadius="16">
+                    <TextBlock x:Name="TxtAutocolant" Text="Salut, WPF!" Foreground="White"
+                               FontSize="22" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <!-- TODO Sarcina 9 (avansat): Stratul 3 — folia de protecție.
+                     Un Grid x:Name="Folie" peste capacul laptopului (Left 40, Top 30, 480 x 330),
+                     cu Panel.ZIndex="3", IsHitTestVisible="False", Visibility="Collapsed";
+                     în interior: un Rectangle alb semitransparent și un TextBlock rotit. -->
+            </Canvas>
+        </Border>
+
+        <!-- ================= Coloana 1: panoul de comenzi ================= -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="15,0,0,0">
+
+                <TextBlock Text="Poziție" FontSize="16" FontWeight="Bold" Margin="0,0,0,6"/>
+                <TextBlock x:Name="TxtX" Text="X: 0"/>
+                <Slider x:Name="SldX" Minimum="-100" Maximum="200" Value="0"
+                        ValueChanged="SldX_ValueChanged" Margin="0,2,0,8"/>
+                <TextBlock x:Name="TxtY" Text="Y: 0"/>
+                <Slider x:Name="SldY" Minimum="-120" Maximum="140" Value="0"
+                        ValueChanged="SldY_ValueChanged" Margin="0,2,0,12"/>
+
+                <TextBlock Text="Rotire și mărime" FontSize="16" FontWeight="Bold" Margin="0,0,0,6"/>
+                <TextBlock x:Name="TxtUnghi" Text="Unghi: 0°"/>
+                <Slider x:Name="SldUnghi" Minimum="-180" Maximum="180" Value="0"
+                        ValueChanged="SldUnghi_ValueChanged" Margin="0,2,0,8"/>
+                <TextBlock x:Name="TxtScala" Text="Mărime: 100%"/>
+                <Slider x:Name="SldScala" Minimum="0.5" Maximum="2" Value="1"
+                        ValueChanged="SldScala_ValueChanged" Margin="0,2,0,8"/>
+                <CheckBox x:Name="ChkOglindit" Content="Oglindește autocolantul"
+                          Checked="ChkOglindit_Changed" Unchecked="ChkOglindit_Changed"
+                          Margin="0,0,0,12"/>
+
+                <TextBlock Text="Textul autocolantului" FontSize="16" FontWeight="Bold" Margin="0,0,0,6"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <TextBox x:Name="TxtTextNou" Width="180"/>
+                    <Button Content="Aplică" Margin="8,0,0,0" Padding="10,2"
+                            Click="BtnAplicaText_Click"/>
+                </StackPanel>
+
+                <TextBlock Text="Straturi și efecte" FontSize="16" FontWeight="Bold" Margin="0,0,0,6"/>
+                <Button x:Name="BtnStrat" Content="Autocolantul sub cel galben"
+                        Click="BtnStrat_Click" Margin="0,0,0,8"/>
+                <TextBlock x:Name="TxtOpacitate" Text="Opacitate: 100%"/>
+                <Slider x:Name="SldOpacitate" Minimum="0.3" Maximum="1" Value="1"
+                        ValueChanged="SldOpacitate_ValueChanged" Margin="0,2,0,8"/>
+                <CheckBox x:Name="ChkUmbra" Content="Umbră"
+                          Checked="ChkUmbra_Changed" Unchecked="ChkUmbra_Changed"
+                          Margin="0,0,0,6"/>
+                <CheckBox x:Name="ChkFolie" Content="Folie de protecție"
+                          Checked="ChkFolie_Changed" Unchecked="ChkFolie_Changed"
+                          Margin="0,0,0,12"/>
+
+                <Button Content="Reset" Padding="10,4" Click="BtnReset_Click"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
