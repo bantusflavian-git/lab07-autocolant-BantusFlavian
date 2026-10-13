@@ -50,8 +50,7 @@ namespace AutocolantStudio
             TxtUnghi.Text = $"Unghi: {e.NewValue:0}°";
 
         }
-
-        private void SldScala_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void AplicaScala(RoutedPropertyChangedEventArgs<double> e)
         {
             // Sarcina 8 (avansat): mută această logică într-o metodă AplicaScala()
             if (!IsLoaded) return;
@@ -60,14 +59,16 @@ namespace AutocolantStudio
             ScalareAutocolant.ScaleY = e.NewValue;
 
             TxtScala.Text = $"Mărime: {e.NewValue * 100:0}%";
-
-
+        }
+        private void SldScala_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            AplicaScala(e);
         }
 
         // ---------- Sarcina 8 (avansat). Oglindirea ----------
         private void ChkOglindit_Changed(object sender, RoutedEventArgs e)
         {
-            // TODO Sarcina 8: bifat -> ScaleX negativ (aceeași mărime); debifat -> ScaleX pozitiv
+            ScalareAutocolant.ScaleX = ScalareAutocolant.ScaleX * -1;
         }
 
         // ---------- Sarcina 5. Textul, cu validare (A35) ----------
@@ -111,8 +112,6 @@ namespace AutocolantStudio
 
         private void ChkUmbra_Changed(object sender, RoutedEventArgs e)
         {
-            // TODO Sarcina 6: bifat -> Autocolant.Effect = new DropShadowEffect { ... };
-            //                 debifat -> Autocolant.Effect = null;
             if (ChkUmbra.IsChecked == true)
             {
                 Autocolant.Effect = new DropShadowEffect { BlurRadius = 12, ShadowDepth = 4, Opacity = 0.4 };
@@ -123,9 +122,15 @@ namespace AutocolantStudio
             }
         }
 
-        // ---------- Sarcina 8 (avansat). Evidențierea la mouse ----------
-        // TODO Sarcina 8: creează metodele Autocolant_MouseEnter și Autocolant_MouseLeave
-        //                 (argumentul este MouseEventArgs) și leagă-le în XAML.
+        private void Autocolant_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Autocolant.BorderBrush = Brushes.DarkBlue;
+        }
+
+        private void Autocolant_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Autocolant.BorderBrush = Brushes.White;
+        }
 
         // ---------- Sarcina 9 (avansat). Folia de protecție ----------
         private void ChkFolie_Changed(object sender, RoutedEventArgs e)
@@ -136,9 +141,6 @@ namespace AutocolantStudio
         // ---------- Sarcina 7. Revenirea la starea inițială ----------
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
-            // TODO Sarcina 7: readu Slider-ele la valorile inițiale (ValueChanged face restul),
-            //                 debifează CheckBox-urile, pune TextInitial pe autocolant,
-            //                 golește TxtTextNou și readu autocolantul deasupra celui galben.
 
             TxtAutocolant.Text = "Salut, WPF!";
             SldOpacitate.Value = 1;
@@ -146,7 +148,7 @@ namespace AutocolantStudio
             SldY.Value = 0;
             ChkOglindit.IsChecked = false;
             TxtTextNou.Clear();
-            SldUnghi.Value = 0;
+            SldUnghi.Value = -30;
             SldScala.Value = 1;
             ChkUmbra.IsChecked = false;
             ChkFolie.IsChecked = false;

@@ -46,7 +46,9 @@
                 <Border x:Name="Autocolant" Canvas.Left="120" Canvas.Top="150"
                         Width="170" Height="70"
                         Background="#2563EB" BorderBrush="White" BorderThickness="4"
-                        CornerRadius="16" Panel.ZIndex="2">
+                        CornerRadius="16" Panel.ZIndex="2"
+                        MouseEnter="Autocolant_MouseEnter"
+                        MouseLeave="Autocolant_MouseLeave">
                     <Border.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform x:Name="ScalareAutocolant"
@@ -59,6 +61,7 @@
                             
                         </TransformGroup>
                     </Border.RenderTransform>
+                    
                     <TextBlock x:Name="TxtAutocolant" Text="Salut, WPF!" Foreground="White"
                                FontSize="22" FontWeight="Bold"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -84,8 +87,8 @@
                         ValueChanged="SldY_ValueChanged" Margin="0,2,0,12"/>
 
                 <TextBlock Text="Rotire și mărime" FontSize="16" FontWeight="Bold" Margin="0,0,0,6"/>
-                <TextBlock x:Name="TxtUnghi" Text="Unghi: 0°"/>
-                <Slider x:Name="SldUnghi" Minimum="-180" Maximum="180" Value="0"
+                <TextBlock x:Name="TxtUnghi" Text="Unghi: -30°"/>
+                <Slider x:Name="SldUnghi" Minimum="-180" Maximum="180" Value="-30"
                         ValueChanged="SldUnghi_ValueChanged" Margin="0,2,0,8"/>
                 <TextBlock x:Name="TxtScala" Text="Mărime: 100%"/>
                 <Slider x:Name="SldScala" Minimum="0.5" Maximum="2" Value="1"
