@@ -71,6 +71,30 @@
                      Un Grid x:Name="Folie" peste capacul laptopului (Left 40, Top 30, 480 x 330),
                      cu Panel.ZIndex="3", IsHitTestVisible="False", Visibility="Collapsed";
                      în interior: un Rectangle alb semitransparent și un TextBlock rotit. -->
+                <!-- Stratul 3: Folia de protecție -->
+                <Grid x:Name="Folie"
+                      Canvas.Left="40" Canvas.Top="30"
+                      Width="480" Height="330"
+                      Panel.ZIndex="3"
+                      IsHitTestVisible="False"
+                      Visibility="Collapsed">
+
+                    <!-- Rectangle alb semitransparent cu colțuri rotunjite (potrivit cu capacul laptopului) -->
+                    <Rectangle Fill="#55FFFFFF" RadiusX="18" RadiusY="18"/>
+
+                    <!-- Text rotit poziționat în centrul foliei -->
+                    <TextBlock Text="FOLIE DE PROTECȚIE"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#44000000"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               RenderTransformOrigin="0.5,0.5">
+                        <TextBlock.RenderTransform>
+                            <RotateTransform Angle="-25"/>
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                </Grid>
             </Canvas>
         </Border>
 

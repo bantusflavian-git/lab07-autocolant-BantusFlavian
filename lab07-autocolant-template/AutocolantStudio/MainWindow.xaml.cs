@@ -136,6 +136,14 @@ namespace AutocolantStudio
         private void ChkFolie_Changed(object sender, RoutedEventArgs e)
         {
             // TODO Sarcina 9: afișează sau ascunde Folie (Visibility.Visible / Visibility.Collapsed)
+            if (ChkFolie.IsChecked == true)
+            {
+                Folie.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Folie.Visibility = Visibility.Collapsed;
+            }
         }
 
         // ---------- Sarcina 7. Revenirea la starea inițială ----------
